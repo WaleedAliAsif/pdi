@@ -53,7 +53,7 @@
                       </div>
                      
                       <button type="submit" class="btn btn-primary mr-3">Submit</button>
-                      <a href="{{route('users.index')}}" class="btn iq-bg-danger">Cancel</a>
+                      <a href="{{route('patients.index')}}" class="btn iq-bg-danger">Cancel</a>
                    </form>
                 </div>
              </div>

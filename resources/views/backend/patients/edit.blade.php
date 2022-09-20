@@ -125,7 +125,7 @@
                                         <td>{{ $i }}</td>
                                         <td>{{ $report->name }}</td>
                                         <td>{{ $report->result }}</td>
-                                        <td><a href="{{ $report->file }}">{{ $report->file }}</a></td>
+                                        <td><a href="{{ asset($report->file) }}">{{ asset($report->file) }}</a></td>
                                         <td>{{ date('d-m-y/h:m',strtotime($report->created_at)) }}</td>
                                         <td>
                                    

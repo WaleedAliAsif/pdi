@@ -13,6 +13,14 @@ class APIController extends Controller
         ]);
     }
     public function receiveReport(Request $request){
+
+        $number = rand(0,4);
+        if($number <= 2){
+            $response['Ditected'] = 'Yes';
+        }
+        else{
+            $response['Ditected'] = 'No';
+        }
         $response = array();
         $image = $request->image;
         $name = $request->name;
@@ -20,7 +28,7 @@ class APIController extends Controller
         $response["data"] = [
             'name' => $name,
             'test' => $test,
-            'image' => $image
+            'image' => 'https://pdidentifier.tech/'.$image
         ];
 
         $response['success'] = 1;
