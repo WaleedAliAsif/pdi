@@ -25,7 +25,6 @@ return [
             'Export Designations',
         ],
 
-     
         'Settings' => [
             'Update Settings',
         ],

@@ -107,7 +107,7 @@
                 {{-- @endcan --}}
             </ul>
         </li>
-
+@if(getuser()->hasRole('Super Admin'))
         <li @if (in_array(request()->route()->getName(),
             ['cities.create', 'cities.edit', 'cities.index', 'cities.show'])) class="active" @endif>
             <a href="#cities" class="iq-waves-effect" data-toggle="collapse"
@@ -128,7 +128,7 @@
                 {{-- @endcan --}}
             </ul>
         </li>
-
+@endif
 
     </ul>
 </nav>
