@@ -202,7 +202,7 @@ class PatientController extends Controller
         $response = Http::post('https://pdidentifier.tech/api/receive-patient-report',[
             'test' => $request->name,
             'image' => $test->file,
-            'name' => $test->file,
+            'name' => $patient->user->first_name.' '.$patient->user->last_name,
 
         ]);
         dd($response->json());
