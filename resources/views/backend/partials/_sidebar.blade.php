@@ -64,16 +64,15 @@
                     class="las la-user-tie iq-arrow-left"></i><span>Designations</span><i
                     class="ri-arrow-right-s-line iq-arrow-right"></i></a>
             <ul id="designations" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle" style="">
-                @can('Create Fundheads')
+              
                     <li class="{{ request()->route()->getName() == 'designations.create'? 'active': '' }}"><a
                             href="{{ route('designations.create') }}"><i class="las la-plus-circle"></i>Add
                             Designation</a></li>
-                @endcan
-                @can('Read Fundheads')
+               
+             
                     <li class="{{ request()->route()->getName() == 'designations.index'? 'active': '' }}"><a
                             href="{{ route('designations.index') }}"><i class="las la-th-list"></i>All Designations</a>
                     </li>
-                @endcan
             </ul>
         </li>
         {{-- Designations Edn --}}
@@ -92,12 +91,12 @@
 
         <li @if (in_array(request()->route()->getName(),
             ['patients.create', 'patients.edit', 'patients.index', 'patients.show'])) class="active" @endif>
-            <a href="#userinfo" class="iq-waves-effect" data-toggle="collapse"
+            <a href="#patients" class="iq-waves-effect" data-toggle="collapse"
                 @if (in_array(request()->route()->getName(),
                     ['patients.create', 'patients.edit', 'patients.index', 'patients.show'])) aria-expanded="true" @else aria-expanded="false" @endif><span
                     class="ripple rippleEffect"></span><i class="las la-user-tie iq-arrow-left"></i><span>Patient</span><i
                     class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-            <ul id="userinfo" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle" style="">
+            <ul id="patients" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle" style="">
                 {{-- @can('Create patients') --}}
                     <li class="{{ request()->route()->getName() == 'patients.create'? 'active': '' }}"><a
                             href="{{ route('patients.create') }}"><i class="las la-plus-circle"></i>Add patient</a></li>
@@ -105,6 +104,27 @@
                 {{-- @can('Read patients') --}}
                     <li class="{{ request()->route()->getName() == 'patients.index'? 'active': '' }}"><a
                             href="{{ route('patients.index') }}"><i class="las la-th-list"></i>Patients List</a></li>
+                {{-- @endcan --}}
+            </ul>
+        </li>
+
+        <li @if (in_array(request()->route()->getName(),
+            ['cities.create', 'cities.edit', 'cities.index', 'cities.show'])) class="active" @endif>
+            <a href="#cities" class="iq-waves-effect" data-toggle="collapse"
+                @if (in_array(request()->route()->getName(),
+                    ['cities.create', 'cities.edit', 'cities.index', 'cities.show'])) aria-expanded="true" @else aria-expanded="false" @endif><span
+                    class="ripple rippleEffect"></span><i class="las la-user-tie iq-arrow-left"></i><span>Cities</span><i
+                    class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+            <ul id="cities" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle" style="">
+                {{-- @can('Create patients') --}}
+                    <li class="{{ request()->route()->getName() == 'cities.create'? 'active': '' }}"><a
+                            href="{{ route('cities.create') }}"><i class="las la-plus-circle"></i>Add City</a></li>
+                            <li class="{{ request()->route()->getName() == 'cities.create'? 'active': '' }}"><a
+                                href="{{ route('addCities') }}"><i class="las la-plus-circle"></i>Import Cities</a></li>
+                {{-- @endcan --}}
+                {{-- @can('Read patients') --}}
+                    <li class="{{ request()->route()->getName() == 'cities.index'? 'active': '' }}"><a
+                            href="{{ route('cities.index') }}"><i class="las la-th-list"></i>Cities List</a></li>
                 {{-- @endcan --}}
             </ul>
         </li>

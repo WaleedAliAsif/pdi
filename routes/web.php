@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\GeneralController;
 use App\Http\Controllers\Backend\DesignationController;
 use App\Http\Controllers\Backend\PatientController;
+use App\Http\Controllers\Backend\CitiesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +25,7 @@ Route::get('/', function () {
         return redirect('/login');
     }
 });
+Route::post('pakistan/cities/get/',[CitiesController::class,'getCities'])->name('cities.get');
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'],function () {
 
@@ -48,6 +50,16 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'],function () {
     Route::delete('role/{id}', [RoleController::class, 'destroy'])->name('roles.destroy')->middleware(['can:Delete Roles']);
 
 
+
+    Route::get('cities', [CitiesController::class, 'index'])->name('cities.index');//->middleware(['can:Read Roles']);
+    Route::get('city/create', [CitiesController::class, 'create'])->name('cities.create');//->middleware(['can:Create Roles']);
+    Route::post('city/create/save', [CitiesController::class, 'store'])->name('cities.store');//->middleware(['can:Create Roles']);
+    Route::get('city/{id}', [CitiesController::class, 'show'])->name('cities.show');//->middleware(['can:Read Roles']);
+    Route::get('city/{id}/edit', [CitiesController::class, 'edit'])->name('cities.edit');//->middleware(['can:Update Roles']);
+    Route::put('city/{id}/update', [CitiesController::class, 'update'])->name('cities.update');//->middleware(['can:Update Roles']);
+    Route::delete('city/{id}', [CitiesController::class, 'destroy'])->name('cities.destroy');//->middleware(['can:Delete Roles']);
+    Route::get('import/cities', [CitiesController::class, 'addCities'])->name('addCities');
+    Route::post('importCities', [CitiesController::class, 'importCities'])->name('importCities');
 
 
 

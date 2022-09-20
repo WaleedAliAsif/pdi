@@ -48,10 +48,12 @@ class PatientController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'first_name'=>'required',
-            'last_name'=>'required',
+            'cnic'=>'required|numeric|unique:patients',
+            'first_name'=>'required|regex:/^[a-zA-Z\-]*$/',
+            'last_name'=>'required|regex:/^[a-zA-Z\-]*$/',
             'email'=>'email|required|unique:users',
             'address'=>'required',
+            'city'=>'required',
             'phone'=>'required',
             'gender'=>'required',
         ]);
@@ -78,6 +80,7 @@ class PatientController extends Controller
                 'user_id'=>$user->id,
                 'cnic'=>$request->cnic,
                 'address'=>$request->address,
+                'city_id'=>$request->city,
                 'phone'=>$request->phone,
                 'gender'=>$request->gender
             ]);
@@ -117,7 +120,7 @@ class PatientController extends Controller
      */
     public function edit($id)
     {
-        $patient = Patient::find($id);
+        $patient = Patient::findOrFail($id);
         return view('backend.patients.edit')
         ->with('patient', $patient);
     }
@@ -131,13 +134,14 @@ class PatientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $patient = Patient::find($id);
+        $patient = Patient::findOrFail($id);
 
         $request->validate([
-            'first_name'=>'required',
-            'last_name'=>'required',
+            'first_name'=>'required|regex:/^[a-zA-Z\-]*$/',
+            'last_name'=>'required|regex:/^[a-zA-Z\-]*$/',
             'email' => 'required|email|unique:users,email,'.$patient->user->id,
             'address'=>'required',
+            'city'=>'required',
             'phone'=>'required',
             'gender'=>'required',
         ]);
@@ -145,6 +149,7 @@ class PatientController extends Controller
         $patient->user->last_name = $request->last_name;
         $patient->user->email = $request->email;
         $patient->address = $request->address;
+        $patient->city_id = $request->city;
         $patient->phone = $request->phone;
         $patient->gender = $request->gender;
         $patient->user->save();

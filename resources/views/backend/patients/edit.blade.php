@@ -2,6 +2,10 @@
 @section('title', 'Create User')
 
 @section('styles')
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 @endsection
 
 @push('css')
@@ -48,6 +52,16 @@
                  
                      <div class="row">
                         <div class="col-md-6 col-sm-12 mb-3">
+                            <label for="first_name" class="required">City</label>
+                            <select class="form-control  select2-allow-clear  js-data-example-ajax"
+                                id='city_id' name="city" required>
+                                <option value="{{$patient->city->id}}">{{$patient->city->name}}</option>
+
+                                <option>Search your City and State</option>
+
+                            </select>
+                        </div>
+                        <div class="col-md-6 col-sm-12 mb-3">
                             <label for="first_name" class="required">Address</label>
                             <input type="text" class="form-control" name="address" placeholder="e.g. Gujrat" value="{{$patient->address}}">
                         </div>
@@ -89,31 +103,7 @@
                 </div>
                 <div class="iq-card-body">
                     <div class="table-responsive">
-                        <div class="row justify-content-between">
-                            <div class="col-sm-12 col-md-6">
-                                <div id="user_list_datatable_info" class="dataTables_filter">
-                                    <form class="mr-3 position-relative">
-                                        <div class="form-group mb-0">
-                                            <input type="search" class="form-control" id="exampleInputSearch"
-                                                placeholder="Search" aria-controls="user-list-table">
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <div class="user-list-files d-flex float-right">
-                                    <a class="iq-bg-primary" href="javascript:void();">
-                                        Print
-                                    </a>
-                                    <a class="iq-bg-primary" href="javascript:void();">
-                                        Excel
-                                    </a>
-                                    <a class="iq-bg-primary" href="javascript:void();">
-                                        Pdf
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                   
                         <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid"
                             aria-describedby="user-list-page-info">
                             <thead>
@@ -121,6 +111,7 @@
                                     <th>#</th>
                                     <th>Name</th>
                                     <th>Result</th>
+                                    <th>Image</th>
                                     <th>Date</th>
                                     <th>Action</th>
                                 </tr>
@@ -134,6 +125,7 @@
                                         <td>{{ $i }}</td>
                                         <td>{{ $report->name }}</td>
                                         <td>{{ $report->result }}</td>
+                                        <td><a href="{{ $report->file }}">{{ $report->file }}</a></td>
                                         <td>{{ date('d-m-y/h:m',strtotime($report->created_at)) }}</td>
                                         <td>
                                    
@@ -177,4 +169,36 @@
 @endsection
 
 @push('js')
+<script>
+   // CSRF Token
+var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+$(document).ready(function() {
+    // var conceptName = $('#companyId').find(":selected").text();
+    $("#city_id").select2({
+        theme: "flat",
+        // multiple: "multiple",
+        ajax: {
+            url: "{{route('cities.get')}}"
+            , type: "post"
+            , dataType: 'json'
+            , delay: 250,
+
+            data: function(params) {
+                return {
+                    _token: CSRF_TOKEN
+                    , search: params.term // search term
+                };
+            }
+            , processResults: function(response) {
+                return {
+                    results: response
+                };
+            }
+        , }
+
+    });
+
+});
+
+</script>
 @endpush

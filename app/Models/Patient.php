@@ -13,6 +13,10 @@ class Patient extends Model
     {
         return $this->belongsTo('App\Models\User');
     }
+    public function city()
+    {
+        return $this->belongsTo('App\Models\City');
+    }
     public function doctor_patients()
     {
         return $this->hasMany('App\Models\DoctorPatient');

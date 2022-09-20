@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('cnic')->unique();
             $table->integer('user_id')->unsigned();
+            $table->integer('city_id')->unsigned();
             $table->string('address');
             $table->string('phone');
             $table->string('gender');

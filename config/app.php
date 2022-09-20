@@ -200,7 +200,9 @@ return [
         //Sweet Alert
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
         // Logger to discord
-        MarvinLabs\DiscordLogger\ServiceProvider::class
+        MarvinLabs\DiscordLogger\ServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+
 
 
     ],
@@ -218,6 +220,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ])->toArray(),
 
 ];
