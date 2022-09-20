@@ -29,7 +29,7 @@
 
                         <div class="col-md-6 col-sm-12 mb-3">
                             <label for="first_name" class="required">Test Name</label>
-                            <input type="text" class="form-control" name="name" placeholder="">
+                            <input type="text" class="form-control" name="name" placeholder="" value="Parkinson">
                         </div>
 
                         <div class="col-lg-6 col-md-6 col-sm-12">

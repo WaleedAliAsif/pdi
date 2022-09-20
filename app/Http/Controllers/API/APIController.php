@@ -13,7 +13,7 @@ class APIController extends Controller
         ]);
     }
     public function receiveReport(Request $request){
-
+        $response = array();
         $number = rand(0,4);
         if($number <= 2){
             $response['Ditected'] = 'Yes';
@@ -21,7 +21,7 @@ class APIController extends Controller
         else{
             $response['Ditected'] = 'No';
         }
-        $response = array();
+        
         $image = $request->image;
         $name = $request->name;
         $test = $request->test;
