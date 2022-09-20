@@ -13,6 +13,7 @@ use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 
 class PatientController extends Controller
 {
@@ -198,8 +199,14 @@ class PatientController extends Controller
             $test->save();
         }
 
-      
+        $response = Http::post('https://pdidentifier.tech/api/receive-patient-report',[
+            'test' => $request->name,
+            'image' => $test->file,
+            'name' => $test->file,
 
+        ]);
+        dd($response->json());
+        return $response->json();
         return redirect()->route('patients.editTest',$test->id);
     }
     public function editTest($id){
