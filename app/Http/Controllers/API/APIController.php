@@ -32,7 +32,7 @@ class APIController extends Controller
         
         $tesst = PatientReport::find($test_id);
       
-            $tesst->result = $var1;
+            $tesst->result = 'Yes';
             $tesst->save();
       
         
