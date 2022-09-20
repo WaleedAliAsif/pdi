@@ -180,6 +180,9 @@ class PatientController extends Controller
     }
     public function addTestsSave(Request $request, $id)
     {
+        $request->validate([
+            'file'=>'mimes:nii',
+        ]);
         $patient = Patient::find($id);
         $test = PatientReport::create([
             'patient_id'=>$patient->id,
@@ -207,7 +210,7 @@ class PatientController extends Controller
             'name' => $patient->user->first_name.' '.$patient->user->last_name,
 
         ]);
-        
+        alert()->success('Result', 'Your Result is '.$test->result);
         return redirect()->route('patients.editTest',$test->id);
     }
     public function editTest($id){

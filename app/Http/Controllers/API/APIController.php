@@ -19,11 +19,11 @@ class APIController extends Controller
         $number = rand(0,4);
         if($number <= 2){
             $var1 = 'yes';
-            $response['Ditected'] = 'Yes';
+            $response['Ditected'] = 'Positive';
         }
         else{
             $var1 = 'No';
-            $response['Ditected'] = 'No';
+            $response['Ditected'] = 'Negative';
         }
         $test_id = $request->test_id;
         $image = $request->image;
