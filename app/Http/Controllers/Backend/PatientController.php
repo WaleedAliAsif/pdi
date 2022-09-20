@@ -199,14 +199,15 @@ class PatientController extends Controller
             $test->save();
         }
 
-        $response = Http::post('https://pdidentifier.tech/api/receive-patient-report',[
+        
+        $response = Http::post('http://pdidentifier.tech/api/receive-patient-report',[
+            'test_id' => $test->id,
             'test' => $request->name,
             'image' => $test->file,
             'name' => $patient->user->first_name.' '.$patient->user->last_name,
 
         ]);
-        dd($response->json());
-        return $response->json();
+        
         return redirect()->route('patients.editTest',$test->id);
     }
     public function editTest($id){
