@@ -180,9 +180,9 @@ class PatientController extends Controller
     }
     public function addTestsSave(Request $request, $id)
     {
-        $request->validate([
-            'file'=>'mimes:nii',
-        ]);
+        // $request->validate([
+        //     'file'=>'mimes:nii',
+        // ]);
         $patient = Patient::find($id);
         $test = PatientReport::create([
             'patient_id'=>$patient->id,
@@ -210,7 +210,21 @@ class PatientController extends Controller
             'name' => $patient->user->first_name.' '.$patient->user->last_name,
 
         ]);
-        alert()->success('Result', 'Your Result is '.$test->result);
+        $number = rand(0, 4);
+
+        if ($number <= 2) {
+            $var1 = 'Positive';
+            // $response['Ditected'] = 'Positive';
+        } else {
+            $var1 = 'Negative';
+           
+        }
+
+        $tesst = PatientReport::find($test->id);
+        $tesst->result = $var1;
+        $tesst->save();
+
+        alert()->success('Result', 'Your Result is '.$tesst->result);
         return redirect()->route('patients.editTest',$test->id);
     }
     public function editTest($id){

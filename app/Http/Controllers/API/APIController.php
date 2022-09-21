@@ -8,20 +8,21 @@ use App\Models\PatientReport;
 
 class APIController extends Controller
 {
-    public function getUsers(){
+    public function getUsers()
+    {
         return response()->json([
             'message' => 'Hello World'
         ]);
     }
-    public function receiveReport(Request $request){
-
+    public function receiveReport(Request $request)
+    {
         $response = array();
-        $number = rand(0,4);
-        if($number <= 2){
+        $number = rand(0, 4);
+
+        if ($number <= 2) {
             $var1 = 'yes';
             $response['Ditected'] = 'Positive';
-        }
-        else{
+        } else {
             $var1 = 'No';
             $response['Ditected'] = 'Negative';
         }
@@ -29,13 +30,13 @@ class APIController extends Controller
         $image = $request->image;
         $name = $request->name;
         $test = $request->test;
-        
+
         $tesst = PatientReport::find($test_id);
-      
-            $tesst->result = $var1;
-            $tesst->save();
-      
-        
+
+        $tesst->result = $var1;
+        $tesst->save();
+
+
         $response["data"] = [
             'id' => $test_id,
             'name' => $name,
@@ -46,6 +47,5 @@ class APIController extends Controller
         $response['success'] = 1;
 
         return json_encode($response);
-}
-       
+    }
 }
